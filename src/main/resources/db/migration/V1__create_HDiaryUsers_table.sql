@@ -1,0 +1,8 @@
+CREATE TABLE HDiaryUsers (
+    id BIGSERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE ,
+    date_of_birth DATE NOT NULL,
+    sex VARCHAR(10) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);

@@ -1,0 +1,10 @@
+==============================HDiary==============================
+
+This is a diary application intended to structurize and boost
+usual paper diary's purposes:
+    -Habit control
+    -Thoughts organization
+    -Mental state tracking
+
+
+
