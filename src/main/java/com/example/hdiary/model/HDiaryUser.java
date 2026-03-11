@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor // required for jpa
 public class HDiaryUser {
 
@@ -23,4 +22,17 @@ public class HDiaryUser {
     private String email;
     private String password;
 
+    public HDiaryUser(
+            String username,
+            LocalDate dateOfBirth,
+            Sex sex,
+            String email,
+            String password
+    ){
+        this.username = username;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.email = email;
+        this.password = password;
+    }
 }
