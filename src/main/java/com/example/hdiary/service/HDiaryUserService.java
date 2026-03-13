@@ -9,10 +9,10 @@ import java.time.LocalDate;
 
 @Service
 public class HDiaryUserService {
-    private final HDiaryUserRepository repository;
+    private final HDiaryUserRepository hDiaryUserRepository;
 
-    public HDiaryUserService(HDiaryUserRepository repository) {
-        this.repository = repository;
+    public HDiaryUserService(HDiaryUserRepository hDiaryUserRepository) {
+        this.hDiaryUserRepository = hDiaryUserRepository;
     }
 
     /*
@@ -35,7 +35,7 @@ public class HDiaryUserService {
           email,
           password
         );
-        return repository.save(user);
+        return hDiaryUserRepository.save(user);
     }
 
     /*
@@ -44,7 +44,7 @@ public class HDiaryUserService {
     -Proper exceptions and their handling is required;
      */
     public HDiaryUser logIn(String email, String password){
-        HDiaryUser user = repository.findByEmail(email)
+        HDiaryUser user = hDiaryUserRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid credentials"));
 
         if(user.getPassword().equals(password)){
