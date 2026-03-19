@@ -10,10 +10,11 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor // required for jpa
+@Table(name = "hdiaryusers")
 public class HDiaryUser {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated
