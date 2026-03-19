@@ -20,7 +20,7 @@ public class HDiaryUserService {
     -Password hashing is required;
     -Already used username and email verification is required;
     -Password strength verification is required;
-     */
+    */
     public HDiaryUser register(
             String username,
             LocalDate dateOfBirth,
@@ -42,7 +42,7 @@ public class HDiaryUserService {
     -Password comparison will require changes after hashing implementation;
     -Transfer object implementation is required not to send the whole entity with sensitive data;
     -Proper exceptions and their handling is required;
-     */
+    */
     public HDiaryUser logIn(String email, String password){
         HDiaryUser user = hDiaryUserRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid credentials"));
