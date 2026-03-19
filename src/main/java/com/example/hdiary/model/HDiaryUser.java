@@ -16,9 +16,11 @@ public class HDiaryUser {
     @GeneratedValue
     private Long id;
 
+    @Enumerated
+    private Sex sex;
+
     private String username;
     private LocalDate dateOfBirth;
-    private Sex sex;
     private String email;
     private String password;
 
