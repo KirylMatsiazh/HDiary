@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface HDiaryUserRepository extends JpaRepository<HDiaryUser, Long> {
     Optional<HDiaryUser> findByEmail(String email);
+    Optional<HDiaryUser> findByUsername(String username);
 }
