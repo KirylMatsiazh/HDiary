@@ -12,9 +12,11 @@ public class HDiaryUserDetailsService implements UserDetailsService {
     @Autowired
     private HDiaryUserRepository hDiaryUserRepository;
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        HDiaryUser user = hDiaryUserRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));;
+    // loadUserByUsername to follow required signature. Email is used internally for
+    // token generation and searches.
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        HDiaryUser user = hDiaryUserRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),

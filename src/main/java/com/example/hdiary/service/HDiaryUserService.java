@@ -29,10 +29,10 @@ public class HDiaryUserService {
 
 
     /*
-    -Validation for each field is required;
-    -Password hashing is required;
-    -Already used username and email verification is required;
-    -Password strength verification is required;
+    TODO ===> Validation for each field is required;
+    TODO ===> Password hashing is required;
+    TODO ===> Already used username and email verification is required;
+    TODO ===> Password strength verification is required;
     */
     public HDiaryUser register(
             String username,
@@ -52,9 +52,9 @@ public class HDiaryUserService {
     }
 
     /*
-    -Password comparison will require changes after hashing implementation;
-    -Transfer object implementation is required not to send the whole entity with sensitive data;
-    -Proper exceptions and their handling is required;
+    TODO ===> Password comparison will require changes after hashing implementation;
+    TODO ===> Transfer object implementation is required not to send the whole entity with sensitive data;
+    TODO ===> Proper exceptions and their handling is required;
     */
     public String logIn(String email, String password){
         HDiaryUser user = findByEmail(email);

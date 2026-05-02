@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 public class CreateDailyReportRequestDTO {
-    // Implement custom state stats validator
+    // TODO ===> Implement custom state stats validator
     @NotNull
     private UserStateStats stateStats;
 

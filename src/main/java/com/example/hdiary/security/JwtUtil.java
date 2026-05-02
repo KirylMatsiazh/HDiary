@@ -50,7 +50,7 @@ public class JwtUtil {
         }
     }
 
-    public String extractUsername(String token) {
+    public String extractEmail(String token) {
         return parse(token)
                 .getBody()
                 .getSubject();

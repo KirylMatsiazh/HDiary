@@ -1,10 +1,6 @@
 package com.example.hdiary.dto.response;
 
 import com.example.hdiary.model.Sex;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDate;

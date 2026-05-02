@@ -32,8 +32,7 @@ public class RegisterHDiaryUserRequestDTO {
     @Email
     private String email;
 
-    // Implement custom password validator(password strength approval,
-    // common weak passwords rejection)
+    // TODO ===> Implement custom password validator(password strength approval, common weak passwords rejection)
     @NotNull
     private String password;
 

@@ -1,6 +1,5 @@
 package com.example.hdiary.security;
 
-import com.example.hdiary.security.HDiaryUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +41,7 @@ public class WebSecurityConfig {
                                 .anyRequest().authenticated()
                 );
         // Add the JWT Token filter before the UsernamePasswordAuthenticationFilter
-        // The project is stateless, but this line defines position of security filter chain relatively to spring's internal filters
+        // The project is stateless, this line defines position of security filter chain relatively to spring's internal filters
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
