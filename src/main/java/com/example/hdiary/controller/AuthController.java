@@ -2,7 +2,7 @@ package com.example.hdiary.controller;
 
 import com.example.hdiary.dto.request.LoginHDiaryUserRequestDTO;
 import com.example.hdiary.dto.request.RegisterHDiaryUserRequestDTO;
-import com.example.hdiary.security.JwtUtil;
+import com.example.hdiary.service.AuthService;
 import com.example.hdiary.service.HDiaryUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +17,11 @@ import java.util.Map;
 public class AuthController {
     @Autowired
     HDiaryUserService userService;
+    @Autowired
+    AuthService authService;
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginHDiaryUserRequestDTO loginUser) {
-        String jwtToken = userService.logIn(loginUser.getEmail(), loginUser.getPassword());
+        String jwtToken = authService.logIn(loginUser.getEmail(), loginUser.getPassword());
 
         if(jwtToken == null){
             return ResponseEntity
@@ -41,7 +43,7 @@ public class AuthController {
             return "Error: Username is already taken!";     // TODO ===> Set a proper response for this case.
         }
 
-        userService.register(
+        authService.register(
                 registerUser.getUsername(),
                 registerUser.getDateOfBirth(),
                 registerUser.getSex(),
