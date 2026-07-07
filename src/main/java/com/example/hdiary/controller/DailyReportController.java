@@ -1,15 +1,13 @@
 package com.example.hdiary.controller;
 
+import com.example.hdiary.dto.request.CreateDailyReportRequestDTO;
 import com.example.hdiary.dto.response.GetDailyReportResponseDTO;
 import com.example.hdiary.model.DailyReport;
 import com.example.hdiary.model.HDiaryUser;
 import com.example.hdiary.service.DailyReportService;
 import com.example.hdiary.service.HDiaryUserService;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,7 @@ public class DailyReportController {
     private final DailyReportService dailyReportService;
     private final HDiaryUserService userService;
 
+    //TODO: add exception handling
     public DailyReportController(DailyReportService dailyReportService, HDiaryUserService userService) {
         this.dailyReportService = dailyReportService;
         this.userService = userService;
@@ -56,6 +55,35 @@ public class DailyReportController {
                 report.getStateStats(),
                 report.getCreationDate()
         );
+    }
+
+    @PostMapping
+    public String submitDailyReport(@RequestBody CreateDailyReportRequestDTO submitReportRequest){
+        dailyReportService.createDailyReport(
+                getCurrentUser(),
+                submitReportRequest.getNote(),
+                submitReportRequest.getStateStats()
+        );
+
+        return "Report has been submitted successfully!";
+    }
+
+    @PutMapping("/{id}")
+    public String editDailyReport(@PathVariable Long id, @RequestBody CreateDailyReportRequestDTO editedReportData){
+        dailyReportService.updateDailyReport(
+                id,
+                editedReportData.getNote(),
+                editedReportData.getStateStats()
+        );
+
+        return "The report was updated successfully!";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteDailyReport(@PathVariable Long id){
+        dailyReportService.deleteDailyReport(id);
+
+        return "The report has been deleted successfully!";
     }
 
     private HDiaryUser getCurrentUser() {
