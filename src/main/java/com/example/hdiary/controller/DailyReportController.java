@@ -6,6 +6,7 @@ import com.example.hdiary.model.DailyReport;
 import com.example.hdiary.model.HDiaryUser;
 import com.example.hdiary.service.DailyReportService;
 import com.example.hdiary.service.HDiaryUserService;
+import jakarta.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,7 +59,7 @@ public class DailyReportController {
     }
 
     @PostMapping
-    public String submitDailyReport(@RequestBody CreateDailyReportRequestDTO submitReportRequest){
+    public String submitDailyReport(@Valid @RequestBody CreateDailyReportRequestDTO submitReportRequest){
         dailyReportService.createDailyReport(
                 getCurrentUser(),
                 submitReportRequest.getNote(),
@@ -69,7 +70,7 @@ public class DailyReportController {
     }
 
     @PutMapping("/{id}")
-    public String editDailyReport(@PathVariable Long id, @RequestBody CreateDailyReportRequestDTO editedReportData){
+    public String editDailyReport(@PathVariable Long id, @Valid @RequestBody CreateDailyReportRequestDTO editedReportData){
         dailyReportService.updateDailyReport(
                 id,
                 editedReportData.getNote(),
