@@ -42,6 +42,8 @@ public class AuthController {
     public String registerUser(@Valid @RequestBody RegisterHDiaryUserRequestDTO registerUser) {
         if (userService.isUsernameTaken(registerUser.getUsername())) {
             return "Error: Username is already taken!";     // TODO ===> Set a proper response for this case.
+        } else if(userService.isEmailTaken(registerUser.getEmail())){
+            return "Error: An account with similar email already exists";
         }
 
         authService.register(

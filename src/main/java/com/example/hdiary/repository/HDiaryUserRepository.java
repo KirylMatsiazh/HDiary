@@ -9,4 +9,5 @@ public interface HDiaryUserRepository extends JpaRepository<HDiaryUser, Long> {
     Optional<HDiaryUser> findByEmail(String email);
     Optional<HDiaryUser> findByUsername(String username);
     Boolean existsHDiaryUserByUsername(String username);
+    Boolean existsHDiaryUserByEmail(String email);
 }

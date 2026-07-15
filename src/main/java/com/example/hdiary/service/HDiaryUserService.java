@@ -25,4 +25,8 @@ public class HDiaryUserService {
     public Boolean isUsernameTaken(String username){
         return hDiaryUserRepository.existsHDiaryUserByUsername(username);
     }
+
+    public Boolean isEmailTaken(String email){
+        return hDiaryUserRepository.existsHDiaryUserByEmail(email);
+    }
 }
