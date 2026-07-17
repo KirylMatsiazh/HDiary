@@ -7,8 +7,10 @@ import com.example.hdiary.model.HDiaryUser;
 import com.example.hdiary.service.DailyReportService;
 import com.example.hdiary.service.HDiaryUserService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +53,15 @@ public class DailyReportController {
             @PathVariable Long id
     ){
         DailyReport report = dailyReportService.getDailyReportById(id);
-        return new GetDailyReportResponseDTO(
-                report.getNote(),
-                report.getStateStats(),
-                report.getCreationDate()
-        );
+        if(isOwnerValid(report)){
+            return new GetDailyReportResponseDTO(
+                    report.getNote(),
+                    report.getStateStats(),
+                    report.getCreationDate()
+            );
+        } else{
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
     }
 
     @PostMapping
@@ -71,20 +77,27 @@ public class DailyReportController {
 
     @PutMapping("/{id}")
     public String editDailyReport(@PathVariable Long id, @Valid @RequestBody CreateDailyReportRequestDTO editedReportData){
-        dailyReportService.updateDailyReport(
-                id,
-                editedReportData.getNote(),
-                editedReportData.getStateStats()
-        );
-
-        return "The report was updated successfully!";
+        if(isOwnerValid(dailyReportService.getDailyReportById(id))){
+            dailyReportService.updateDailyReport(
+                    id,
+                    editedReportData.getNote(),
+                    editedReportData.getStateStats()
+            );
+            return "The report was updated successfully!";
+        } else{
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
     }
 
     @DeleteMapping("/{id}")
     public String deleteDailyReport(@PathVariable Long id){
-        dailyReportService.deleteDailyReport(id);
+        if(isOwnerValid(dailyReportService.getDailyReportById(id))){
+            dailyReportService.deleteDailyReport(id);
+            return "The report has been deleted successfully!";
+        } else{
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
 
-        return "The report has been deleted successfully!";
     }
 
     private HDiaryUser getCurrentUser() {
@@ -94,4 +107,10 @@ public class DailyReportController {
 
         return userService.findByEmail(email);
     }
+
+    private Boolean isOwnerValid(DailyReport report){
+        return getCurrentUser().getId().equals(report.getHDiaryUser().getId());
+    }
 }
+
+
